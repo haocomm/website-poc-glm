@@ -1,0 +1,28 @@
+# Nuxt.js build output
+.nuxt/
+.output/
+dist/
+
+# Node dependencies
+node_modules/
+
+# Cache files
+.nitro/
+.nuxt/cache/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vite cache
+.vite/

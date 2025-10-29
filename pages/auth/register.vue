@@ -69,6 +69,7 @@
 
 <script setup>
 const router = useRouter()
+const { register, loading } = useAuth()
 
 const form = reactive({
   username: '',
@@ -76,30 +77,18 @@ const form = reactive({
   password: ''
 })
 
-const loading = ref(false)
 const error = ref('')
 
 async function handleRegister() {
-  loading.value = true
   error.value = ''
 
   try {
-    const response = await $fetch('/api/auth/register', {
-      method: 'POST',
-      body: form,
-      baseURL: 'http://localhost:3001'
-    })
-
-    // Store token and user info
-    localStorage.setItem('auth_token', response.token)
-    localStorage.setItem('user', JSON.stringify(response.user))
+    await register(form.username, form.email, form.password)
 
     // Redirect to chat
     await router.push('/chat')
   } catch (err) {
-    error.value = err?.data?.error || 'Registration failed'
-  } finally {
-    loading.value = false
+    error.value = err.message
   }
 }
 

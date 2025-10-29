@@ -1,5 +1,42 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- Navigation Header -->
+    <div class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div class="container mx-auto px-4 py-3">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-4">
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+              Chat App
+            </h1>
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+              Welcome, {{ user?.username }}
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2">
+              <div class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center">
+                <span class="text-white text-sm font-medium">
+                  {{ user?.username?.[0]?.toUpperCase() }}
+                </span>
+              </div>
+              <span class="text-sm font-medium text-gray-900 dark:text-white">
+                {{ user?.username }}
+              </span>
+            </div>
+            <UButton
+              @click="handleLogout"
+              variant="soft"
+              color="gray"
+              size="sm"
+            >
+              <Icon name="i-heroicons-arrow-right-on-rectangle" class="w-4 h-4" />
+              Logout
+            </UButton>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container mx-auto px-4 py-8">
       <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 h-screen">
         <!-- Sidebar with rooms -->
@@ -168,7 +205,13 @@
 </template>
 
 <script setup>
+// Protect this route - requires authentication
+definePageMeta({
+  middleware: 'auth'
+})
+
 const router = useRouter()
+const { user, token, logout } = useAuth()
 
 // State
 const rooms = ref([])
@@ -191,22 +234,15 @@ let socket = null
 
 // Check authentication
 onMounted(async () => {
-  const token = localStorage.getItem('auth_token')
-  if (!token) {
-    await router.push('/auth/login')
-    return
-  }
-
   await loadRooms()
   initializeSocket()
 })
 
 async function loadRooms() {
   try {
-    const token = localStorage.getItem('auth_token')
     rooms.value = await $fetch('/api/chat/rooms', {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token.value}`
       },
       baseURL: 'http://localhost:3001'
     })
@@ -216,11 +252,9 @@ async function loadRooms() {
 }
 
 function initializeSocket() {
-  const token = localStorage.getItem('auth_token')
-
   socket = io('http://localhost:3001', {
     auth: {
-      token
+      token: token.value
     }
   })
 
@@ -255,10 +289,9 @@ async function joinRoom(roomId) {
 
 async function loadMessages(roomId) {
   try {
-    const token = localStorage.getItem('auth_token')
     messages.value = await $fetch(`/api/chat/rooms/${roomId}/messages`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token.value}`
       },
       baseURL: 'http://localhost:3001'
     })
@@ -283,11 +316,10 @@ async function createRoom() {
   creatingRoom.value = true
 
   try {
-    const token = localStorage.getItem('auth_token')
     const newRoom = await $fetch('/api/chat/rooms', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token.value}`
       },
       body: roomForm,
       baseURL: 'http://localhost:3001'
@@ -304,6 +336,11 @@ async function createRoom() {
   } finally {
     creatingRoom.value = false
   }
+}
+
+async function handleLogout() {
+  await logout()
+  await router.push('/auth/login')
 }
 
 function formatTime(timestamp) {

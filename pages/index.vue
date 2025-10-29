@@ -9,21 +9,37 @@
           Connect with others in real-time conversations
         </p>
 
-        <div class="space-y-4">
+        <div v-if="isAuthenticated" class="space-y-4">
+          <div class="text-lg text-gray-600 dark:text-gray-300 mb-4">
+            Welcome back, {{ user?.username }}!
+          </div>
           <UButton
             size="xl"
             color="primary"
             variant="solid"
-            @click="navigateTo('/auth/login')"
+            @click="navigateTo('/chat')"
+          >
+            Go to Chat
+          </UButton>
+        </div>
+
+        <div v-else class="space-y-4">
+          <UButton
+            size="xl"
+            color="primary"
+            variant="solid"
+            @click="navigateTo('/auth/register')"
           >
             Get Started
           </UButton>
 
-          <div class="text-sm text-gray-500 dark:text-gray-400">
-            Already have an account?
-            <NuxtLink to="/auth/login" class="text-primary-600 hover:text-primary-500">
-              Sign in
-            </NuxtLink>
+          <div class="space-y-2">
+            <div class="text-sm text-gray-500 dark:text-gray-400">
+              Already have an account?
+              <NuxtLink to="/auth/login" class="text-primary-600 hover:text-primary-500">
+                Sign in
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
@@ -32,6 +48,13 @@
 </template>
 
 <script setup>
+const { isAuthenticated, user, initAuth } = useAuth()
+
+// Initialize auth state on page load
+onMounted(async () => {
+  await initAuth()
+})
+
 // SEO Meta
 useHead({
   title: 'Chat App - Real-time Conversations',

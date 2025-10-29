@@ -1,6 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import User from '../models/User'
+import { authenticateToken, AuthRequest } from '../middleware/auth'
 
 const router = express.Router()
 
@@ -121,6 +122,50 @@ router.post('/login', async (req, res) => {
     })
   } catch (error) {
     console.error('Login error:', error)
+    res.status(500).json({
+      error: 'Internal server error'
+    })
+  }
+})
+
+// Get current user info
+router.get('/me', authenticateToken, async (req: AuthRequest, res) => {
+  try {
+    const user = req.user
+
+    res.json({
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        isOnline: user.isOnline,
+        lastSeen: user.lastSeen
+      }
+    })
+  } catch (error) {
+    console.error('Get user error:', error)
+    res.status(500).json({
+      error: 'Internal server error'
+    })
+  }
+})
+
+// Logout endpoint
+router.post('/logout', authenticateToken, async (req: AuthRequest, res) => {
+  try {
+    const user = req.user
+
+    // Update online status
+    user.isOnline = false
+    user.lastSeen = new Date()
+    await user.save()
+
+    res.json({
+      message: 'Logout successful'
+    })
+  } catch (error) {
+    console.error('Logout error:', error)
     res.status(500).json({
       error: 'Internal server error'
     })

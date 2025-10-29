@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     mongoUri: process.env.MONGODB_URI,
     // Public keys (exposed to client-side)
     public: {
-      apiBase: process.env.API_BASE_URL || '/api'
+      apiBase: process.env.API_BASE_URL || 'http://localhost:3001/api'
     }
   },
   nitro: {

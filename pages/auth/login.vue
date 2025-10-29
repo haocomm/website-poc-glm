@@ -56,38 +56,26 @@
 </template>
 
 <script setup>
-const { $client } = useNuxtApp()
 const router = useRouter()
+const { login, loading } = useAuth()
 
 const form = reactive({
   email: '',
   password: ''
 })
 
-const loading = ref(false)
 const error = ref('')
 
 async function handleLogin() {
-  loading.value = true
   error.value = ''
 
   try {
-    const response = await $fetch('/api/auth/login', {
-      method: 'POST',
-      body: form,
-      baseURL: 'http://localhost:3001'
-    })
-
-    // Store token and user info
-    localStorage.setItem('auth_token', response.token)
-    localStorage.setItem('user', JSON.stringify(response.user))
+    await login(form.email, form.password)
 
     // Redirect to chat
     await router.push('/chat')
   } catch (err) {
-    error.value = err?.data?.error || 'Login failed'
-  } finally {
-    loading.value = false
+    error.value = err.message
   }
 }
 

@@ -31,7 +31,35 @@ docker compose version
 
 ## Quick Start (Development)
 
-For quick development setup with default configurations:
+**⚠️ Important**: Docker deployment is currently experiencing native binding issues (see [Issue #2](https://github.com/haocomm/website-poc-glm/issues/2)).
+
+### Option 1: Local Development (Recommended) ✅
+
+For reliable development setup:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/haocomm/website-poc-glm.git
+cd website-poc-glm
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Set up environment
+cp .env.example .env
+# Edit .env with your MongoDB URI and JWT secret
+
+# 4. Start development servers
+pnpm start:full
+
+# 5. Access the application
+# Frontend: http://localhost:3000
+# Backend: http://localhost:3001
+```
+
+### Option 2: Docker (Experimental) ⚠️
+
+**Note**: Docker build may fail due to native binding issues. See troubleshooting section.
 
 ```bash
 # 1. Clone the repository
@@ -41,7 +69,7 @@ cd website-poc-glm
 # 2. Copy environment file
 cp .env.docker .env
 
-# 3. Start all services
+# 3. Start all services (may fail)
 docker-compose up -d
 
 # 4. Check service status
@@ -231,6 +259,31 @@ docker cp $(docker-compose ps -q mongodb):/tmp/backup ./mongodb-backup-$(date +%
 ## Troubleshooting
 
 ### Common Issues
+
+#### ⚠️ 0. Docker Native Binding Issue (Critical)
+**Issue**: Docker build fails with `oxc-parser` native binding error
+
+**Error**:
+```
+ERROR  Cannot find native binding. npm has a bug related to optional dependencies
+Cannot find module '@oxc-parser/binding-linux-x64-gnu'
+```
+
+**Current Status**:
+- ✅ **Local Development**: Works perfectly with `pnpm start:full`
+- ❌ **Docker Build**: Fails due to missing native bindings
+- 🔍 **Investigation**: [Issue #2](https://github.com/haocomm/website-poc-glm/issues/2) is open and actively being worked on
+
+**Workaround**: Use local development until Docker issue is resolved
+
+**Temporary Solution**:
+```bash
+# Use local development instead of Docker
+git clone https://github.com/haocomm/website-poc-glm.git
+cd website-poc-glm
+pnpm install
+pnpm start:full
+```
 
 #### 1. Port Conflicts
 ```bash

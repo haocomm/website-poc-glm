@@ -104,7 +104,7 @@
         "../node_modules/.pnpm/@nuxt+ui@2.22.3_magicast@0.5.0_tsx@4.20.6_vite@7.1.12_@types+node@20.19.24_jiti@2.6.1_t_e88d9c3b2c202c3d6a4cfe2116b0420b/node_modules/@nuxt/ui/dist/runtime/*"
       ],
       "#ui-colors": [
-        "./ui.colors"
+        "./ui.colors.mjs"
       ],
       "#color-mode-options": [
         "./color-mode-options.mjs"
@@ -121,11 +121,8 @@
       "#tailwind-config": [
         "./tailwind/expose"
       ],
-      "#tailwind-config/*": [
-        "./tailwind/expose/*"
-      ],
       "#app-manifest": [
-        "./manifest/meta/dev"
+        "./manifest/meta/34fa9afa-c5cd-45b9-b937-1b3aee39b3c1.json"
       ],
       "#components": [
         "./components"
@@ -198,6 +195,6 @@
     "../node_modules/.pnpm/@nuxt+devtools@2.7.0_vite@7.1.12_@types+node@20.19.24_jiti@2.6.1_terser@5.44.0_tsx@4.20_7d768695475ec2fb4ef06d63c899a48d/node_modules/dist/runtime/server",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.5.0/node_modules/runtime/server",
     "../node_modules/.pnpm/@nuxt+telemetry@2.6.6_magicast@0.5.0/node_modules/dist/runtime/server",
-    "dev"
+    "../.output"
   ]
 }

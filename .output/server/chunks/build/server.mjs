@@ -17,7 +17,6 @@ import 'node:events';
 import 'node:crypto';
 import '@iconify/utils';
 import 'consola';
-import 'node:module';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
 import 'devalue';

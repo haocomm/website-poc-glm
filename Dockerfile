@@ -1,5 +1,5 @@
-# Use Node.js 18 LTS as base image (Debian-based for better native module support)
-FROM node:18-bullseye-slim AS base
+# Use Node.js 20 LTS as base image (Debian-based for better native module support)
+FROM node:20-bullseye-slim AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Generate package-lock.json and install with npm (better Docker support)
-COPY package.json pnpm-lock.yaml* ./
+# Copy package files and install with npm (generate fresh package-lock.json)
+COPY package.json ./
 RUN npm install --package-lock-only --ignore-scripts && \
     npm install --ignore-scripts && \
     npm rebuild
@@ -23,6 +23,9 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Set Node environment to treat .mjs files as ES modules and use import.meta
+ENV NODE_OPTIONS="--experimental-vm-modules"
 
 # Generate the Nuxt application
 RUN npm run build
@@ -41,12 +44,11 @@ RUN useradd --system --uid 1001 --gid nodejs nuxtjs
 
 # Copy the built application
 COPY --from=builder /app/.output ./.output
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=deps /app/package.json ./package.json
+COPY --from=deps /app/package-lock.json ./package-lock.json
 
 # Install only production dependencies
-RUN npm install --package-lock-only --ignore-scripts && \
-    npm install --ignore-scripts && \
+RUN npm install --ignore-scripts && \
     npm rebuild
 
 USER nuxtjs

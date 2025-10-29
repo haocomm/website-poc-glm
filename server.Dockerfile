@@ -1,5 +1,5 @@
-# Use Node.js 18 LTS as base image (Debian-based for better native module support)
-FROM node:18-bullseye-slim AS base
+# Use Node.js 20 LTS as base image (Debian-based for better native module support)
+FROM node:20-bullseye-slim AS base
 
 # Install dependencies only when needed
 FROM base AS deps

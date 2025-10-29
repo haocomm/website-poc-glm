@@ -1,0 +1,38 @@
+{
+  "name": "website-poc-glm",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "server:dev": "tsx watch server/index.ts",
+    "start:full": "concurrently \"pnpm server:dev\" \"pnpm dev\"",
+    "setup": "cp .env.example .env"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^2.18.7",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.3",
+    "nuxt": "^3.14.159",
+    "socket.io": "^4.7.5",
+    "vue": "^3.5.12",
+    "vue-router": "^4.4.5"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^20.16.13",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.3"
+  }
+}

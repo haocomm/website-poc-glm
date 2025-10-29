@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for the chat application */
+.chat-container {
+  height: calc(100vh - 8rem);
+}
+
+.chat-messages {
+  height: calc(100% - 4rem);
+  overflow-y: auto;
+}
+
+.typing-indicator {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}

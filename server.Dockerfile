@@ -38,7 +38,11 @@ RUN npm install --package-lock-only --ignore-scripts && \
     npm install --ignore-scripts && \
     npm rebuild
 
-USER backend
+# Change ownership of the app directory to backend user
+RUN chown -R backend:nodejs /app
+
+# Comment out USER for debugging
+# USER backend
 
 EXPOSE 3001
 

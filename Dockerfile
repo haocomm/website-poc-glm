@@ -12,11 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies using pnpm with native module fixes
+# Generate package-lock.json and install with npm (better Docker support)
 COPY package.json pnpm-lock.yaml* ./
-RUN corepack enable pnpm && \
-    pnpm i --frozen-lockfile --ignore-scripts && \
-    pnpm rebuild
+RUN npm install --package-lock-only --ignore-scripts && \
+    npm install --ignore-scripts && \
+    npm rebuild
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -25,7 +25,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Generate the Nuxt application
-RUN corepack enable pnpm && pnpm run build
+RUN npm run build
 
 # Production image, copy all the files and run nuxi generate
 FROM base AS runner
@@ -45,9 +45,9 @@ COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
 # Install only production dependencies
-RUN corepack enable pnpm && \
-    pnpm i --frozen-lockfile --prod --ignore-scripts && \
-    pnpm rebuild
+RUN npm install --package-lock-only --ignore-scripts && \
+    npm install --ignore-scripts && \
+    npm rebuild
 
 USER nuxtjs
 

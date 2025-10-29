@@ -12,11 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies using pnpm with native module fixes
+# Generate package-lock.json and install with npm (better Docker support)
 COPY package.json pnpm-lock.yaml* ./
-RUN corepack enable pnpm && \
-    pnpm i --frozen-lockfile --ignore-scripts && \
-    pnpm rebuild
+RUN npm install --package-lock-only --ignore-scripts && \
+    npm install --ignore-scripts && \
+    npm rebuild
 
 # Production image, copy all the files and run
 FROM base AS runner
@@ -34,12 +34,12 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Install only production dependencies
-RUN corepack enable pnpm && \
-    pnpm i --frozen-lockfile --prod --ignore-scripts && \
-    pnpm rebuild
+RUN npm install --package-lock-only --ignore-scripts && \
+    npm install --ignore-scripts && \
+    npm rebuild
 
 USER backend
 
 EXPOSE 3001
 
-CMD ["corepack", "pnpm", "server:dev"]
+CMD ["npm", "run", "server:dev"]

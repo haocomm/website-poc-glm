@@ -1,64 +1,113 @@
-# Chat App - Real-time Chat Application
+# 🚀 Chat App - Real-time Chat Application
 
 A modern real-time chat application built with Nuxt 4, Express, MongoDB, and Socket.IO.
 
-## Tech Stack
+## ✨ Features
 
-- **Frontend**: Nuxt 4 + NuxtUI 4
+- 🔐 **Secure Authentication**: JWT-based user registration and login
+- 💬 **Real-time Messaging**: Instant chat with Socket.IO
+- 🏠 **Multiple Chat Rooms**: Create and join different rooms
+- 👥 **Online Presence**: See who's online and typing indicators
+- 📱 **Responsive Design**: Works perfectly on mobile and desktop
+- 🌙 **Dark Mode**: Built-in theme switching
+- 🐳 **Docker Ready**: One-command deployment with Docker Compose
+
+## 🛠️ Tech Stack
+
+- **Frontend**: Nuxt 4 + NuxtUI 4 + Vue 3
 - **Backend**: Node.js + Express + TypeScript
-- **Database**: MongoDB with Mongoose
-- **Real-time**: Socket.IO
-- **Authentication**: JWT tokens
+- **Database**: MongoDB with Mongoose ODM
+- **Real-time**: Socket.IO for live messaging
+- **Authentication**: JWT tokens with bcrypt security
+- **Deployment**: Docker + Docker Compose
+- **Cache**: Redis for session storage (production)
 
-## Features
+## 🚀 Quick Start
 
-- Real-time messaging
-- Multiple chat rooms
-- User authentication (register/login)
-- Online user presence
-- Typing indicators
-- Responsive design
-- Dark mode support
+### Option 1: Docker (Recommended) 🐳
 
-## Getting Started
+**Prerequisites**: Docker & Docker Compose
 
-### Prerequisites
+```bash
+# 1. Clone the repository
+git clone https://github.com/haocomm/website-poc-glm.git
+cd website-poc-glm
 
-- Node.js (v18 or higher)
-- pnpm package manager
-- MongoDB (local or cloud instance)
+# 2. Start with Docker Compose
+make dev
 
-### Installation
+# Or manually:
+cp .env.docker .env
+docker-compose up -d
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd website-poc-glm
-   ```
+# 3. Access the application
+# Frontend: http://localhost:3000
+# Backend API: http://localhost:3001
+```
 
-2. **Install dependencies**
-   ```bash
-   pnpm install
-   ```
+### Option 2: Local Development
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   ```
+**Prerequisites**: Node.js 18+, pnpm, MongoDB
 
-   Edit `.env` with your configuration:
-   ```
-   PORT=3001
-   MONGODB_URI=mongodb://localhost:27017/chat-app
-   JWT_SECRET=your-secret-key
-   ```
+```bash
+# 1. Clone and install
+git clone https://github.com/haocomm/website-poc-glm.git
+cd website-poc-glm
+pnpm install
 
-4. **Start the development servers**
-   ```bash
-   pnpm start:full
-   ```
+# 2. Set up environment
+cp .env.example .env
+# Edit .env with your MongoDB URI and JWT secret
 
-   This will start both the frontend (http://localhost:3000) and backend (http://localhost:3001) concurrently.
+# 3. Start development servers
+pnpm start:full
+```
+
+**Access Points**:
+- 🌐 **Frontend**: http://localhost:3000
+- 🔧 **Backend API**: http://localhost:3001
+- 🗄️ **MongoDB**: localhost:27017
+- 🔴 **Redis**: localhost:6379
+
+## 🐳 Docker Deployment
+
+### Development Environment
+```bash
+# Start all services
+make dev
+
+# View logs
+make logs
+
+# Stop services
+make down
+
+# Clean up
+make clean
+```
+
+### Production Environment
+```bash
+# 1. Configure production environment
+cp .env.prod.example .env.prod
+# Edit .env.prod with your production values
+
+# 2. Deploy production services
+make prod
+
+# 3. Check service health
+make health-check
+```
+
+**Available Commands**:
+- `make help` - Show all available commands
+- `make status` - Check service status
+- `make mongo` - Connect to MongoDB shell
+- `make redis` - Connect to Redis CLI
+- `make backup` - Backup MongoDB data
+- `make restore BACKUP_DIR=path` - Restore from backup
+
+📖 **For detailed deployment instructions, see [DEPLOYMENT.md](./DEPLOYMENT.md)**
 
 ## Development Scripts
 

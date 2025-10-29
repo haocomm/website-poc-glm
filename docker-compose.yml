@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: chat-app-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: chat-app
+    volumes:
+      - mongodb_data:/data/db
+      - ./docker/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - chat-app-network
+
+  # Backend API Server
+  backend:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    container_name: chat-app-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      MONGODB_URI: mongodb://chatappuser:password123@mongodb:27017/chat-app?authSource=admin
+      JWT_SECRET: your-super-secure-jwt-secret-change-in-production
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server:/app/server
+      - ./package.json:/app/package.json
+      - ./pnpm-lock.yaml:/app/pnpm-lock.yaml
+    networks:
+      - chat-app-network
+
+  # Frontend Nuxt Application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chat-app-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOST: 0.0.0.0
+      API_BASE_URL: http://localhost:3001/api
+    depends_on:
+      - backend
+    networks:
+      - chat-app-network
+
+  # Redis for Session Storage (Optional but recommended for production)
+  redis:
+    image: redis:7.2-alpine
+    container_name: chat-app-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - chat-app-network
+    command: redis-server --appendonly yes
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  chat-app-network:
+    driver: bridge

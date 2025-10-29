@@ -54,6 +54,42 @@ UserSchema.methods.comparePassword = async function(candidatePassword) {
 };
 const User = mongoose.model("User", UserSchema);
 
+const authenticateToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({
+        error: "Access token required"
+      });
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) {
+      return res.status(401).json({
+        error: "Invalid token - user not found"
+      });
+    }
+    req.user = user;
+    next();
+  } catch (error) {
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(401).json({
+        error: "Invalid token"
+      });
+    }
+    if (error instanceof jwt.TokenExpiredError) {
+      return res.status(401).json({
+        error: "Token expired"
+      });
+    }
+    console.error("Auth middleware error:", error);
+    return res.status(500).json({
+      error: "Internal server error"
+    });
+  }
+};
+
 const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
@@ -144,6 +180,42 @@ router.post("/login", async (req, res) => {
     });
   } catch (error) {
     console.error("Login error:", error);
+    res.status(500).json({
+      error: "Internal server error"
+    });
+  }
+});
+router.get("/me", authenticateToken, async (req, res) => {
+  try {
+    const user = req.user;
+    res.json({
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        avatar: user.avatar,
+        isOnline: user.isOnline,
+        lastSeen: user.lastSeen
+      }
+    });
+  } catch (error) {
+    console.error("Get user error:", error);
+    res.status(500).json({
+      error: "Internal server error"
+    });
+  }
+});
+router.post("/logout", authenticateToken, async (req, res) => {
+  try {
+    const user = req.user;
+    user.isOnline = false;
+    user.lastSeen = /* @__PURE__ */ new Date();
+    await user.save();
+    res.json({
+      message: "Logout successful"
+    });
+  } catch (error) {
+    console.error("Logout error:", error);
     res.status(500).json({
       error: "Internal server error"
     });

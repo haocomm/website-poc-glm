@@ -240,7 +240,7 @@ async function renderInlineStyles(usedModules) {
 
 const renderSSRHeadOptions = {"omitLineBreaks":false};
 
-const entryIds = ["node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_fd67c23c8bf138543986fe37ecb217e6/node_modules/nuxt/dist/app/entry.js"];
+const entryIds = ["node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_7b585a888b9d3f7d04e9f5498efc3b42/node_modules/nuxt/dist/app/entry.js"];
 
 globalThis.__buildAssetsURL = buildAssetsURL;
 globalThis.__publicAssetsURL = publicAssetsURL;

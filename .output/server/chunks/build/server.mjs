@@ -9,7 +9,7 @@ import { format } from 'node:url';
 import { isIP } from 'node:net';
 import { promises, statSync, createReadStream } from 'node:fs';
 import { basename } from 'node:path';
-import { i as defuFn, k as klona, e as createError$1, j as defu, l as createDefu, m as hasProtocol, n as isScriptProtocol, o as joinURL, w as withQuery, s as sanitizeStatusCode, q as getContext, r as baseURL, t as createHooks, v as executeAsync, x as withBase, y as destr, z as toRouteMatcher, A as createRouter$1 } from '../nitro/nitro.mjs';
+import { i as defuFn, k as klona, j as defu, l as createDefu, m as hasProtocol, n as isScriptProtocol, o as joinURL, e as createError$1, w as withQuery, s as sanitizeStatusCode, q as getContext, r as baseURL, t as createHooks, v as executeAsync, x as withBase, y as destr, z as toRouteMatcher, A as createRouter$1 } from '../nitro/nitro.mjs';
 import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
 import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'vue/server-renderer';
 import { u as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
@@ -17,6 +17,7 @@ import 'node:events';
 import 'node:crypto';
 import '@iconify/utils';
 import 'consola';
+import 'node:module';
 import 'vue-bundle-renderer/runtime';
 import 'unhead/server';
 import 'devalue';
@@ -2708,7 +2709,7 @@ const mr = Symbol.toStringTag, wi = n$1((i) => typeof i == "object" && typeof i.
       for (const [p, h2] of l) f2.append(p, h2);
       return f2;
     }
-    const { toFormData: a } = await import('./multipart-parser-DCV9XFfH.mjs');
+    const { toFormData: a } = await import('./multipart-parser-DZM4lp0y.mjs');
     return a(this.body, o2);
   }
   async blob() {
@@ -4238,7 +4239,7 @@ const createError = (error) => {
   });
   return nuxtError;
 };
-const unhead_qfbHG7O12y7UGrDdqlJU6_vOoiVsRGpFt3uy2Ymc6RI = /* @__PURE__ */ defineNuxtPlugin({
+const unhead__Eq3c0v_c8wiuSHO_NiZYy2mXzMalRWtnhPz5pUTBek = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:head",
   enforce: "pre",
   setup(nuxtApp) {
@@ -4263,22 +4264,23 @@ const _routes = [
   {
     name: "chat",
     path: "/chat",
-    component: () => import('./chat-CTElLWzL.mjs')
+    meta: { "middleware": "auth" },
+    component: () => import('./chat-BcZmjO-D.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-C50cB9kF.mjs')
+    component: () => import('./index-CLJyTtY2.mjs')
   },
   {
     name: "auth-login",
     path: "/auth/login",
-    component: () => import('./login-DR9UdHW-.mjs')
+    component: () => import('./login-BwKuEgzE.mjs')
   },
   {
     name: "auth-register",
     path: "/auth/register",
-    component: () => import('./register-BdSK2-Cs.mjs')
+    component: () => import('./register-yVZh_tIX.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -4398,7 +4400,9 @@ const globalMiddleware = [
   validate,
   manifest_45route_45rule
 ];
-const namedMiddleware = {};
+const namedMiddleware = {
+  auth: () => import('./auth-D9ttKn3c.mjs')
+};
 const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
   enforce: "pre",
@@ -4623,7 +4627,7 @@ const reducers = [
   ["Ref", (data) => isRef(data) && data.value],
   ["Reactive", (data) => isReactive(data) && toRaw(data)]
 ];
-const revive_payload_server_MN7G24l0b0eMCJaIaUvG8PHu5M2laTWj0bVXyNsngDk = /* @__PURE__ */ defineNuxtPlugin({
+const revive_payload_server_xnrsCAnQFKDZSc_z1YnIBlFkhz3SteemDkH_3iny_P4 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:revive-payload:server",
   setup() {
     for (const [reducer, fn] of reducers) {
@@ -4631,56 +4635,56 @@ const revive_payload_server_MN7G24l0b0eMCJaIaUvG8PHu5M2laTWj0bVXyNsngDk = /* @__
     }
   }
 });
-const LazyUAccordion = defineAsyncComponent(() => import('./Accordion-Cx2ocbwP.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUAlert = defineAsyncComponent(() => import('./Alert-1iaSXcTM.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUAvatar = defineAsyncComponent(() => import('./Avatar-Bo6m4WVK.mjs').then((n2) => n2.A).then((r2) => r2["default"] || r2.default || r2));
-const LazyUAvatarGroup = defineAsyncComponent(() => import('./AvatarGroup-BkbyWfhy.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUBadge = defineAsyncComponent(() => import('./Badge-brJIIkPA.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUButton = defineAsyncComponent(() => import('./Button-CzYLx3lF.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUButtonGroup = defineAsyncComponent(() => import('./ButtonGroup-Dzi-QPvf.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUCarousel = defineAsyncComponent(() => import('./Carousel-ttQtgnA2.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUChip = defineAsyncComponent(() => import('./Chip-DxG_Th3I.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUDropdown = defineAsyncComponent(() => import('./Dropdown-CP_QE3vQ.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUIcon = defineAsyncComponent(() => import('./Icon-yaeKMBOf.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUKbd = defineAsyncComponent(() => import('./Kbd-B7cyYuGN.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyULink = defineAsyncComponent(() => import('./Link-lersgEI5.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUMeter = defineAsyncComponent(() => import('./Meter-DnRUm9c2.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUMeterGroup = defineAsyncComponent(() => import('./MeterGroup-ad_liCcO.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUProgress = defineAsyncComponent(() => import('./Progress-HOb3rd7F.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUCheckbox = defineAsyncComponent(() => import('./Checkbox-D_ZDUfZ4.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUForm = defineAsyncComponent(() => import('./Form-C-6Cuk9j.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUFormGroup = defineAsyncComponent(() => import('./FormGroup-BHNbwERn.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUInput = defineAsyncComponent(() => import('./Input-DS-K8VmZ.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUInputMenu = defineAsyncComponent(() => import('./InputMenu-Due4Y0DB.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyURadio = defineAsyncComponent(() => import('./Radio-BAzEfdp4.mjs').then((n2) => n2.R).then((r2) => r2["default"] || r2.default || r2));
-const LazyURadioGroup = defineAsyncComponent(() => import('./RadioGroup-Ditw39ei.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyURange = defineAsyncComponent(() => import('./Range-Bvo4vpY_.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUSelect = defineAsyncComponent(() => import('./Select-BXIriLBL.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUSelectMenu = defineAsyncComponent(() => import('./SelectMenu-CGnJIN57.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUTextarea = defineAsyncComponent(() => import('./Textarea-DvyjjE0a.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUToggle = defineAsyncComponent(() => import('./Toggle-JvG2BN5H.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUTable = defineAsyncComponent(() => import('./Table-Y0a-x6iR.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUCard = defineAsyncComponent(() => import('./Card-Bg1XFqAv.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUContainer = defineAsyncComponent(() => import('./Container-DD15_wKO.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUDivider = defineAsyncComponent(() => import('./Divider-BYujVSOZ.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUSkeleton = defineAsyncComponent(() => import('./Skeleton-DV12z_Q3.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUBreadcrumb = defineAsyncComponent(() => import('./Breadcrumb-CYgFy__p.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUCommandPalette = defineAsyncComponent(() => import('./CommandPalette-DHZGEIT1.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUCommandPaletteGroup = defineAsyncComponent(() => import('./CommandPaletteGroup-CLDvDRC1.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUHorizontalNavigation = defineAsyncComponent(() => import('./HorizontalNavigation-CmUbPyZD.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUPagination = defineAsyncComponent(() => import('./Pagination-BrQWIdR0.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUTabs = defineAsyncComponent(() => import('./Tabs-De2tS5e5.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUVerticalNavigation = defineAsyncComponent(() => import('./VerticalNavigation-Cj_ujC1E.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUContextMenu = defineAsyncComponent(() => import('./ContextMenu-C3fHKL7i.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUModal = defineAsyncComponent(() => import('./Modal-C5lvBGMH.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUAccordion = defineAsyncComponent(() => import('./Accordion-ByHNoCuZ.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUAlert = defineAsyncComponent(() => import('./Alert-D0XQh8HD.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUAvatar = defineAsyncComponent(() => import('./Avatar-BaGAyPcZ.mjs').then((n2) => n2.A).then((r2) => r2["default"] || r2.default || r2));
+const LazyUAvatarGroup = defineAsyncComponent(() => import('./AvatarGroup-3u2Sh6Oa.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUBadge = defineAsyncComponent(() => import('./Badge-DJBXJtNr.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUButton = defineAsyncComponent(() => import('./Button-9ee1Ge7s.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUButtonGroup = defineAsyncComponent(() => import('./ButtonGroup-FtQ0vIY5.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUCarousel = defineAsyncComponent(() => import('./Carousel-ayiQkdxG.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUChip = defineAsyncComponent(() => import('./Chip-DMlkJOUa.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUDropdown = defineAsyncComponent(() => import('./Dropdown-BfmAHf87.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUIcon = defineAsyncComponent(() => import('./Icon-DJIseBIh.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUKbd = defineAsyncComponent(() => import('./Kbd-CXwRWb8-.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyULink = defineAsyncComponent(() => import('./Link-BPhPgFL9.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUMeter = defineAsyncComponent(() => import('./Meter-M4-mOxOG.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUMeterGroup = defineAsyncComponent(() => import('./MeterGroup-BR_dzA68.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUProgress = defineAsyncComponent(() => import('./Progress-CupOBowZ.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUCheckbox = defineAsyncComponent(() => import('./Checkbox-DwumBdTT.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUForm = defineAsyncComponent(() => import('./Form-DBlSVJkL.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUFormGroup = defineAsyncComponent(() => import('./FormGroup-Bc-N4XEc.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUInput = defineAsyncComponent(() => import('./Input-BtHmH20k.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUInputMenu = defineAsyncComponent(() => import('./InputMenu-gYrJRzni.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyURadio = defineAsyncComponent(() => import('./Radio-CszscW-5.mjs').then((n2) => n2.R).then((r2) => r2["default"] || r2.default || r2));
+const LazyURadioGroup = defineAsyncComponent(() => import('./RadioGroup-DucJAPiJ.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyURange = defineAsyncComponent(() => import('./Range-DMyq2WFo.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUSelect = defineAsyncComponent(() => import('./Select-Bs3-YJ9O.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUSelectMenu = defineAsyncComponent(() => import('./SelectMenu-CogUuuJW.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUTextarea = defineAsyncComponent(() => import('./Textarea-3YysIckj.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUToggle = defineAsyncComponent(() => import('./Toggle-ChsXS2S1.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUTable = defineAsyncComponent(() => import('./Table-CJxtQFgP.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUCard = defineAsyncComponent(() => import('./Card-DAjQZbxZ.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUContainer = defineAsyncComponent(() => import('./Container-C1jip1zp.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUDivider = defineAsyncComponent(() => import('./Divider-CyvYyDlp.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUSkeleton = defineAsyncComponent(() => import('./Skeleton-CvmwtJ48.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUBreadcrumb = defineAsyncComponent(() => import('./Breadcrumb-D1k35iJ-.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUCommandPalette = defineAsyncComponent(() => import('./CommandPalette-Cm_B6BD7.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUCommandPaletteGroup = defineAsyncComponent(() => import('./CommandPaletteGroup-wg6GDr5a.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUHorizontalNavigation = defineAsyncComponent(() => import('./HorizontalNavigation-CHx61_T-.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUPagination = defineAsyncComponent(() => import('./Pagination-DQmu5e56.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUTabs = defineAsyncComponent(() => import('./Tabs-BE9lnoDm.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUVerticalNavigation = defineAsyncComponent(() => import('./VerticalNavigation-Dg92Slpw.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUContextMenu = defineAsyncComponent(() => import('./ContextMenu-mJHsVfMs.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUModal = defineAsyncComponent(() => import('./Modal-CLpeltua.mjs').then((r2) => r2["default"] || r2.default || r2));
 const LazyUModals = defineAsyncComponent(() => Promise.resolve().then(() => serverPlaceholder).then((r2) => r2["default"] || r2.default || r2));
-const LazyUNotification = defineAsyncComponent(() => import('./Notification-BGILFFHk.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUNotifications = defineAsyncComponent(() => import('./Notifications-Co3UVCoE.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUPopover = defineAsyncComponent(() => import('./Popover-CuQ9bHEC.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyUSlideover = defineAsyncComponent(() => import('./Slideover-zfokbDbW.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUNotification = defineAsyncComponent(() => import('./Notification-B6I_Siv-.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUNotifications = defineAsyncComponent(() => import('./Notifications-B6DW5Gd4.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUPopover = defineAsyncComponent(() => import('./Popover-BIoU5jsk.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUSlideover = defineAsyncComponent(() => import('./Slideover-Dlg_zOz2.mjs').then((r2) => r2["default"] || r2.default || r2));
 const LazyUSlideovers = defineAsyncComponent(() => Promise.resolve().then(() => serverPlaceholder).then((r2) => r2["default"] || r2.default || r2));
-const LazyUTooltip = defineAsyncComponent(() => import('./Tooltip-BhsPNeTJ.mjs').then((r2) => r2["default"] || r2.default || r2));
-const LazyIcon = defineAsyncComponent(() => import('./index-0vvINzLF.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyUTooltip = defineAsyncComponent(() => import('./Tooltip-BOGAkWwj.mjs').then((r2) => r2["default"] || r2.default || r2));
+const LazyIcon = defineAsyncComponent(() => import('./index-OpNUjnzO.mjs').then((r2) => r2["default"] || r2.default || r2));
 const lazyGlobalComponents = [
   ["UAccordion", LazyUAccordion],
   ["UAlert", LazyUAlert],
@@ -4743,7 +4747,7 @@ const components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4 = /* @__PURE
   }
 });
 const slidOverInjectionKey = Symbol("nuxt-ui.slideover");
-const slideovers__eWsumozbHEVbdycVAjdmQMNY_1zTohFuihRl_vtfzo = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+const slideovers_66K_MzJmeUyBCDBrDOLPbSLD2gMd_q3bZDs2l1UOnNQ = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
   const slideoverState = shallowRef({
     component: "div",
     props: {}
@@ -4751,7 +4755,7 @@ const slideovers__eWsumozbHEVbdycVAjdmQMNY_1zTohFuihRl_vtfzo = /* @__PURE__ */ d
   nuxtApp.vueApp.provide(slidOverInjectionKey, slideoverState);
 });
 const modalInjectionKey = Symbol("nuxt-ui.modal");
-const modals_sUy11VobM_V2xQFULy7KD_yqmzxiTgB5_48LO7pZ71A = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
+const modals_DBEiLOQk6U5tTeNiiCAhmXOZht7QnEU1FFdBnQilT0E = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
   const modalState = shallowRef({
     component: "div",
     props: {}
@@ -7606,7 +7610,7 @@ const _rose = { "50": "#fff1f2", "100": "#ffe4e6", "200": "#fecdd3", "300": "#fd
 const _primary = { "50": "rgb(var(--color-primary-50) / <alpha-value>)", "100": "rgb(var(--color-primary-100) / <alpha-value>)", "200": "rgb(var(--color-primary-200) / <alpha-value>)", "300": "rgb(var(--color-primary-300) / <alpha-value>)", "400": "rgb(var(--color-primary-400) / <alpha-value>)", "500": "rgb(var(--color-primary-500) / <alpha-value>)", "600": "rgb(var(--color-primary-600) / <alpha-value>)", "700": "rgb(var(--color-primary-700) / <alpha-value>)", "800": "rgb(var(--color-primary-800) / <alpha-value>)", "900": "rgb(var(--color-primary-900) / <alpha-value>)", "950": "rgb(var(--color-primary-950) / <alpha-value>)", "DEFAULT": "rgb(var(--color-primary-DEFAULT) / <alpha-value>)" };
 const _cool = { "50": "#f9fafb", "100": "#f3f4f6", "200": "#e5e7eb", "300": "#d1d5db", "400": "#9ca3af", "500": "#6b7280", "600": "#4b5563", "700": "#374151", "800": "#1f2937", "900": "#111827", "950": "#030712" };
 const config = { "inherit": _inherit, "current": _current, "transparent": _transparent, "black": _black, "white": _white, "slate": _slate, "gray": _gray, "zinc": _zinc, "neutral": _neutral, "stone": _stone, "red": _red, "orange": _orange, "amber": _amber, "yellow": _yellow, "lime": _lime, "green": _green, "emerald": _emerald, "teal": _teal, "cyan": _cyan, "sky": _sky, "blue": _blue, "indigo": _indigo, "violet": _violet, "purple": _purple, "fuchsia": _fuchsia, "pink": _pink, "rose": _rose, "primary": _primary, "cool": _cool };
-const colors_BsSNjEkNPWo3B7JX8hNkQ0Laxh__pqob_E31ZakHraU = /* @__PURE__ */ defineNuxtPlugin(() => {
+const colors_W2WIcRW7I_zcLn7FfFNYtELEog7z99zvkdHxS_gtVyw = /* @__PURE__ */ defineNuxtPlugin(() => {
   const appConfig2 = useAppConfig();
   useNuxtApp();
   const root = computed(() => {
@@ -9317,7 +9321,7 @@ const _api = {
   getFetch,
   listAPIProviders
 };
-const plugin_C3yyscbq6iyVhl_afa2vBQVCHDBJJQY2_wkwCatm_Jo = /* @__PURE__ */ defineNuxtPlugin({
+const plugin_gakyjYGa9w4FovrCwalAFbWoB5CyCm5fWDheCWRoHXI = /* @__PURE__ */ defineNuxtPlugin({
   name: "@nuxt/icon",
   setup() {
     const configs = /* @__PURE__ */ useRuntimeConfig();
@@ -9360,15 +9364,15 @@ const plugin_C3yyscbq6iyVhl_afa2vBQVCHDBJJQY2_wkwCatm_Jo = /* @__PURE__ */ defin
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 });
 const plugins = [
-  unhead_qfbHG7O12y7UGrDdqlJU6_vOoiVsRGpFt3uy2Ymc6RI,
+  unhead__Eq3c0v_c8wiuSHO_NiZYy2mXzMalRWtnhPz5pUTBek,
   plugin,
-  revive_payload_server_MN7G24l0b0eMCJaIaUvG8PHu5M2laTWj0bVXyNsngDk,
+  revive_payload_server_xnrsCAnQFKDZSc_z1YnIBlFkhz3SteemDkH_3iny_P4,
   components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4,
-  slideovers__eWsumozbHEVbdycVAjdmQMNY_1zTohFuihRl_vtfzo,
-  modals_sUy11VobM_V2xQFULy7KD_yqmzxiTgB5_48LO7pZ71A,
-  colors_BsSNjEkNPWo3B7JX8hNkQ0Laxh__pqob_E31ZakHraU,
+  slideovers_66K_MzJmeUyBCDBrDOLPbSLD2gMd_q3bZDs2l1UOnNQ,
+  modals_DBEiLOQk6U5tTeNiiCAhmXOZht7QnEU1FFdBnQilT0E,
+  colors_W2WIcRW7I_zcLn7FfFNYtELEog7z99zvkdHxS_gtVyw,
   plugin_server_HfP_YeRA1_OQJfKNZccy3WGfXsMwxQ2BYxJYiM4ylSQ,
-  plugin_C3yyscbq6iyVhl_afa2vBQVCHDBJJQY2_wkwCatm_Jo
+  plugin_gakyjYGa9w4FovrCwalAFbWoB5CyCm5fWDheCWRoHXI
 ];
 const layouts = {};
 const LayoutLoader = defineComponent({
@@ -9621,7 +9625,7 @@ function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_fd67c23c8bf138543986fe37ecb217e6/node_modules/nuxt/dist/pages/runtime/app.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_7b585a888b9d3f7d04e9f5498efc3b42/node_modules/nuxt/dist/pages/runtime/app.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
 const AppComponent = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender]]);
@@ -9646,8 +9650,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-5EAl8wvX.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-DoGtg4FU.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-W2obLYJ5.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-C-pfCPGm.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -9657,7 +9661,7 @@ const _sfc_main$1 = {
 const _sfc_setup$1 = _sfc_main$1.setup;
 _sfc_main$1.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_fd67c23c8bf138543986fe37ecb217e6/node_modules/nuxt/dist/app/components/nuxt-error-page.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_7b585a888b9d3f7d04e9f5498efc3b42/node_modules/nuxt/dist/app/components/nuxt-error-page.vue");
   return _sfc_setup$1 ? _sfc_setup$1(props, ctx) : void 0;
 };
 const _sfc_main = {
@@ -9705,7 +9709,7 @@ const _sfc_main = {
 const _sfc_setup = _sfc_main.setup;
 _sfc_main.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_fd67c23c8bf138543986fe37ecb217e6/node_modules/nuxt/dist/app/components/nuxt-root.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("node_modules/.pnpm/nuxt@3.20.0_@parcel+watcher@2.5.1_@types+node@20.19.24_@vue+compiler-sfc@3.5.22_db0@0.3_7b585a888b9d3f7d04e9f5498efc3b42/node_modules/nuxt/dist/app/components/nuxt-root.vue");
   return _sfc_setup ? _sfc_setup(props, ctx) : void 0;
 };
 let entry;
@@ -9728,5 +9732,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { Icon as I, _export_sfc as _, useRouter as a, useNuxtApp as b, appConfig as c, twJoin as d, entry$1 as default, useRuntimeConfig as e, nuxtLinkDefaults as f, getSlotsChildren as g, useAppConfig as h, getIcon as i, asyncDataDefaults as j, createError as k, loadIcon as l, mergeConfig as m, navigateTo as n, omit as o, looseToNumber as p, get as q, resolveRouteObject as r, useState as s, twMerge as t, useHead as u, br as v, qn as w };
+export { Icon as I, _export_sfc as _, useRouter as a, appConfig as b, twJoin as c, defineNuxtRouteMiddleware as d, entry$1 as default, useNuxtApp as e, useRuntimeConfig as f, getSlotsChildren as g, nuxtLinkDefaults as h, useAppConfig as i, getIcon as j, asyncDataDefaults as k, loadIcon as l, mergeConfig as m, navigateTo as n, omit as o, createError as p, looseToNumber as q, resolveRouteObject as r, get as s, twMerge as t, useHead as u, useState as v, br as w, qn as x };
 //# sourceMappingURL=server.mjs.map

@@ -30,7 +30,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3001
-      MONGODB_URI: mongodb://chatappuser:password123@mongodb:27017/chat-app?authSource=admin
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/chat-app?authSource=admin
       JWT_SECRET: your-super-secure-jwt-secret-change-in-production
       FRONTEND_URL: http://localhost:3000
     depends_on:

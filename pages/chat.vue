@@ -232,6 +232,12 @@ const roomForm = reactive({
 // Socket connection
 let socket = null
 
+// Import Socket.IO client
+import { io } from 'socket.io-client'
+
+// Import API configuration
+import { API_BASE_URL, SOCKET_URL } from '~/config/api'
+
 // Check authentication
 onMounted(async () => {
   await loadRooms()
@@ -240,19 +246,21 @@ onMounted(async () => {
 
 async function loadRooms() {
   try {
-    rooms.value = await $fetch('/api/chat/rooms', {
+    const response = await $fetch('/api/chat/rooms', {
       headers: {
         Authorization: `Bearer ${token.value}`
       },
-      baseURL: 'http://localhost:3001'
+      baseURL: API_BASE_URL
     })
+    rooms.value = response.rooms || []
   } catch (error) {
     console.error('Failed to load rooms:', error)
+    rooms.value = []
   }
 }
 
 function initializeSocket() {
-  socket = io('http://localhost:3001', {
+  socket = io(SOCKET_URL, {
     auth: {
       token: token.value
     }
@@ -293,7 +301,7 @@ async function loadMessages(roomId) {
       headers: {
         Authorization: `Bearer ${token.value}`
       },
-      baseURL: 'http://localhost:3001'
+      baseURL: API_BASE_URL
     })
   } catch (error) {
     console.error('Failed to load messages:', error)
@@ -322,8 +330,13 @@ async function createRoom() {
         Authorization: `Bearer ${token.value}`
       },
       body: roomForm,
-      baseURL: 'http://localhost:3001'
+      baseURL: API_BASE_URL
     })
+
+    // Ensure rooms.value is an array before pushing
+    if (!Array.isArray(rooms.value)) {
+      rooms.value = []
+    }
 
     rooms.value.push(newRoom.room)
     showCreateRoom.value = false

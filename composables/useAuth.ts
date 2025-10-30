@@ -7,6 +7,9 @@ interface User {
   lastSeen: string
 }
 
+// Import API configuration
+import { API_BASE_URL } from '~/config/api'
+
 export const useAuth = () => {
   // Initialize auth state from localStorage
   const token = ref<string | null>(process.client ? localStorage.getItem('auth_token') : null)
@@ -45,7 +48,7 @@ export const useAuth = () => {
       const response = await $fetch('/api/auth/login', {
         method: 'POST',
         body: { email, password },
-        baseURL: 'http://localhost:3001'
+        baseURL: API_BASE_URL
       })
 
       token.value = response.token
@@ -66,7 +69,7 @@ export const useAuth = () => {
       const response = await $fetch('/api/auth/register', {
         method: 'POST',
         body: { username, email, password },
-        baseURL: 'http://localhost:3001'
+        baseURL: API_BASE_URL
       })
 
       token.value = response.token
@@ -90,7 +93,7 @@ export const useAuth = () => {
           headers: {
             'Authorization': `Bearer ${token.value}`
           },
-          baseURL: 'http://localhost:3001'
+          baseURL: API_BASE_URL
         })
       }
     } catch (error) {
@@ -113,7 +116,7 @@ export const useAuth = () => {
         headers: {
           'Authorization': `Bearer ${token.value}`
         },
-        baseURL: 'http://localhost:3001'
+        baseURL: API_BASE_URL
       })
 
       user.value = response.user
